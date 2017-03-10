@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>A Form</title>
+		<style>
+			.center {
+			    position: absolute;
+			    right: 11%;
+			    top: 30%;
+			    width: 100%;
+			    text-align: center;
+			    font-size: 18px;
+			    opacity: .9;
+			}
+
+		</style>
+
+</head>
+<body align="center" background="https://i0.wp.com/graphitepublications.com/wp-content/uploads/2015/04/5-Coding-Challenges-to-Help-You-Train-Your-Brain.jpg">
+	<?php
+	$name = $email = $gender = pass= "";
+
+	if ($_SERVER["REQUEST_METHOD"] == "POST"&&!empty($_POST["name"])&&!empty($_POST["email"])&&!empty($_POST["pass"])&&!empty($_POST["gender"]) {
+
+	  $name = test_input($_POST["name"]);
+	  $email = test_input($_POST["email"]);
+	  $pass = test_input($_POST["pass"]);
+		 
+	    if (strlen($_POST["password"]) <= '8') {
+	           $passwordErr = "Your Password Must Contain At Least 8 Characters!";
+		    }
+	    elseif(!preg_match("#[0-9]+#",$password)) {
+		        $passwordErr = "Your Password Must Contain At Least 1 Number!";
+		    }
+	    elseif(!preg_match("#[A-Z]+#",$password)) {
+		        $passwordErr = "Your Password Must Contain At Least 1 Capital Letter!";
+		    }
+    	elseif(!preg_match("#[a-z]+#",$password)) {
+        $passwordErr = "Your Password Must Contain At Least 1 Lowercase Letter!";
+    	}
+		
+		elseif(!empty($_POST["password"])) {
+  	  		$cpasswordErr = "Please Check You've Entered Or Confirmed Your Password!";
+		}
+	  $gender = test_input($_POST["gender"]);
+	}
+	
+
+	function test_input($data) {
+	  $data = trim($data);
+	  $data = stripslashes($data);
+	  $data = htmlspecialchars($data);
+	  return $data;
+	}
+	?>
+
+	<form style="color:white; font-size: 150%" class="center">
+	  <strong>Name:</strong><br>
+	  <input type="text" name="name"><br>
+	  <p></p>
+	  <strong>Email:</strong><br>
+	  <input type="text" name="email"><p></p>
+	  <strong>Password:</strong><br>
+	  <input type="password" name="pass">
+	  <p></p>
+	  Gender:<br>
+	  <input type="radio" name="gender" value="male" checked> Male<br>
+	  <input type="radio" name="gender" value="female"> Female<br>
+	  <p></p>
+	  <p></p>
+	  <input type="submit" value="Submit">
+	</form>
+</body>
+</html>
